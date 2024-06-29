@@ -84,7 +84,7 @@ const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
 
   return (
     <div className="sales-chart">
-      <Line options={options} data={data} />;
+      <Line options={options} data={data} />
     </div>
   );
 };
