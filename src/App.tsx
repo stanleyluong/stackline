@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import PageBody from './app/PageBody';
+import PageHeader from './app/PageHeader';
+import { AppDispatch, RootState } from './app/store';
+import { Product, setProducts } from './app/productSlice';
+import productData from './stackline_frontend_assessment_data_2021.json'
 
 function App() {
+  const products = useSelector((state: RootState) => state.product.products);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(setProducts(productData));
+  }, [dispatch]);
+
+  const product: Product = products[0];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PageHeader />
+      <PageBody product={product} />
     </div>
   );
 }
