@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Product } from './productSlice';
-import ProductDetails from './ProductDetails';
+import ProductDetails from './ProductInfo';
 import ProductSalesGraph from './ProductSalesGraph';
 import ProductSalesTable from './ProductSalesTable';
 
@@ -15,7 +15,7 @@ const PageBody: FC<PageBodyProps> = ({ product }) => {
 
   return (
     <div className="page-body">
-      <div className="page-body-details">
+      <div className="page-body-info">
         <ProductDetails product={product} />
       </div>
       <div className="page-body-graph-and-table">

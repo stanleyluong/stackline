@@ -33,6 +33,13 @@ const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
   const options = {
     responsive: true,
     plugins: {
+      title: {
+        display: true,
+        text: "Sales",
+        font: {
+          family: 'sans-serif',
+        },
+      },
       legend: {
         position: 'top' as const,
       },

@@ -1,12 +1,11 @@
-import React, { useState, useRef } from 'react';
-// import './ImageZoom.css';
+import React, { useState, useRef, FC } from 'react';
 
 interface ImageZoomProps {
   src: string;
   alt: string;
 }
 
-const ImageZoom: React.FC<ImageZoomProps> = ({ src, alt }) => {
+const ImageZoom: FC<ImageZoomProps> = ({ src, alt }) => {
   const [zoom, setZoom] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
