@@ -42,6 +42,8 @@
 
 .product-image {
   width: 300px;
+  height: auto;
+  cursor: zoom-in;
 }
 
 .product-title {
@@ -83,4 +85,28 @@
 .sales-table {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   border-radius: 5px;
+}
+
+.zoom-container {
+  position: relative;
+  display: inline-block;
+}
+
+.zoom-image {
+  width: 300px;
+  height: auto;
+  cursor: zoom-in;
+}
+
+.zoom-lens {
+  position: fixed;
+  top: 300px;
+  left: 300px;
+  width: 300px; 
+  height: 300px; 
+  border: 1px solid #d4d4d4;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transform: translate(-50%, -50%); 
+  z-index: 10;
 }

@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import { Product } from './productSlice';
-
+import ImageZoom from './ImageZoom';
 interface ProductDetailsProps {
   product: Product;
 }
 
 const ProductDetails: FC<ProductDetailsProps> = ({ product }) => {
+
   return (
     <div className="product-details">
-      <img src={product.image} alt={product.title} className="product-image" />
-
+      <ImageZoom src={product.image} alt={product.title} />
       <h3 className="product-title">{product.title}</h3>
       <p className="product-subtitle">{product.subtitle}</p>
       <div className="tag-container">
