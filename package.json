@@ -2,6 +2,7 @@
   "name": "stackline_project",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://stanleyluong.github.io/stackline",
   "dependencies": {
     "@ag-grid-community/all-modules": "^27.3.0",
     "@reduxjs/toolkit": "^2.2.5",
@@ -27,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +52,7 @@
   },
   "devDependencies": {
     "@types/react-table": "^7.7.20",
+    "gh-pages": "^6.1.1",
     "prettier": "3.3.2"
   }
 }
