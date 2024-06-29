@@ -67,14 +67,14 @@ const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
       },
       {
         fill: true,
-        label: 'Wholesale Sales',
+        label: 'Retailer Margin',
         data: salesData.map((week) => week.retailerMargin),
         borderColor: 'blue',
         backgroundColor: 'rgba(135,206,250,0.5)',
       },
       {
         fill: true,
-        label: 'Wholesale Sales',
+        label: 'Units Sold',
         data: salesData.map((week) => week.unitsSold),
         borderColor: 'black',
         backgroundColor: 'rgba(211,211,211,0.5)',
