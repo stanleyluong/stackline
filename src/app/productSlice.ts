@@ -6,7 +6,7 @@ export interface Review {
   score: number;
 }
 
-export interface Sale {
+export interface WeeklySales{
   weekEnding: string;
   retailSales: number;
   wholesaleSales: number;
@@ -24,7 +24,7 @@ export interface Product {
   retailer: string;
   details: string[];
   tags: string[];
-  sales: Sale[];
+  sales: WeeklySales[];
 }
 
 export interface ProductState {

@@ -12,7 +12,7 @@ import {
 } from 'chart.js';
 
 import { Line } from 'react-chartjs-2';
-import { Sale } from './productSlice';
+import { WeeklySales } from './productSlice';
 
 ChartJS.register(
   CategoryScale,
@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 interface ProductSalesGraphProps {
-  salesData: Sale[];
+  salesData: WeeklySales[];
 }
 
 const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
@@ -46,8 +46,11 @@ const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
     },
   };
 
-  const labels = salesData.map((week) => week.weekEnding);
-
+  const labels = salesData.map((week) => {
+    const [year, month, day] = week.weekEnding.split('-');
+    return `${month}-${day}-${year}`;
+  });
+  
   const data = {
     labels,
     datasets: [
@@ -84,7 +87,7 @@ const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
 
   return (
     <div className="sales-chart">
-      <Line options={options} data={data} />
+      <Line options={options} data={data} width={"500px"}/>
     </div>
   );
 };
