@@ -11,66 +11,10 @@
   ); /* Use CSS var from body or default */
 }
 
-/* Navbar Styling */
-.navbar {
-  background-color: #052849; /* Dark blue */
-  color: #ffffff;
-  padding: 0.75rem 1rem; /* Mobile padding */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky; /* Make navbar sticky */
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+/* Navbar Styling - MOSTLY REMOVED as MUI AppBar is used */
+/* Keep any specific overrides if absolutely necessary, but prefer sx prop or theme */
 
-.navbar-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-logo img {
-  width: 40px; /* Increased from 30px */
-  height: 40px; /* Increased from 30px */
-  margin-right: 0.75rem; /* Slightly increased margin */
-}
-
-.navbar-links {
-  list-style: none;
-  display: flex;
-  gap: 0.5rem; /* Spacing for mobile, will increase for desktop */
-}
-
-.navbar-links a {
-  color: #e0e0e0; /* Lighter text for contrast */
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
-  font-size: 0.9rem;
-}
-
-.navbar-links a:hover,
-.navbar-links a.active {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-}
-
-/* Hamburger Menu for Mobile (if links don't fit) - Placeholder */
-.navbar-toggle {
-  display: none; /* Hidden by default, shown on mobile if needed */
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* Main Content Area */
+/* Main Content Area - Generally still useful */
 .main-content {
   flex-grow: 1;
   padding: 1rem; /* Mobile padding */
@@ -79,16 +23,12 @@
   margin: 0 auto; /* Center content area */
 }
 
-/* Section Styling */
-.content-section {
-  background-color: #ffffff;
-  padding: 1.5rem; /* Mobile padding */
-  margin-bottom: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
-}
-
-.content-section h2 {
+/* Section Styling - REMOVED as MUI Paper is used for sections */
+/* Individual section titles (h2) styling might be kept if not fully handled by Typography variants */
+.product-summary-section h2,
+.sales-data-section h2,
+.product-details-section h2,
+.reviews-section h2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
   color: #052849;
@@ -98,36 +38,31 @@
 
 /* Product Summary Section Specifics */
 .product-summary-layout {
+  /* This class is still used in App.tsx for the flex layout */
   display: flex;
   flex-direction: column; /* Mobile: stack image and text */
   gap: 1rem;
 }
 
 .product-image-container {
+  /* Still used */
   flex-shrink: 0;
   text-align: center; /* Center image in its container */
 }
 
 .product-main-image {
+  /* Still used */
   max-width: 250px; /* Mobile image size */
   width: 100%;
   border-radius: 6px;
   margin-bottom: 1rem;
 }
 
-.product-text-info h1 {
-  font-size: 1.8rem; /* Product title */
-  color: #2c3e50;
-  margin-bottom: 0.25rem;
-}
-
-.product-subtitle {
-  font-size: 1rem;
-  color: #7f8c8d;
-  margin-bottom: 1rem;
-}
+/* .product-text-info h1 - Handled by MUI Typography */
+/* .product-subtitle - Handled by MUI Typography */
 
 /* Star rating placeholder styles (adapt to your StarRating component) */
+/* These are for the StarRating.tsx component itself, not specific to ProductSummary */
 .star-rating-component {
   display: flex;
   align-items: center;
@@ -144,80 +79,55 @@
   color: #7f8c8d;
 }
 
-/* Tags */
-.tags-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1rem 0;
-}
+/* Tags - .tags-list and .tag-item are REMOVED as MUI Chip is used */
 
-.tag-item {
-  background-color: #e9ecef;
-  color: #495057;
-  padding: 0.3rem 0.75rem;
-  border-radius: 15px;
-  font-size: 0.85rem;
-}
-
-/* Key-Value Table (Retailer, Brand, ID) */
-.key-value-table {
-  font-size: 0.95rem;
-}
-.key-value-table .row {
-  display: flex;
-  margin-bottom: 0.5rem;
-}
-.key-value-table .key {
-  font-weight: 500;
-  width: 100px;
-  color: #34495e;
-}
-.key-value-table .value {
-  color: #555;
-}
+/* Key-Value Table (Retailer, Brand, ID) - REMOVED as MUI Grid is used */
 
 /* Sales Data Section (Chart and Table) */
 .sales-data-layout {
+  /* Still used */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Ensures vertical stacking on all screen sizes */
   gap: 1.5rem;
 }
 
 .sales-chart-container,
 .sales-table-container {
+  /* Still used */
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
 .sales-chart-container .sales-chart {
+  /* Still used */
   flex-grow: 1;
-  min-height: 300px; /* Graph's inner div has a min-height */
-  /* Ensure the canvas element itself can be responsive within this */
+  width: 100%;
+  max-height: 400px;
 }
 
-.sales-table-container .ag-theme-quartz {
-  width: 100% !important;
-  height: 400px; /* Explicit height for AG-Grid on mobile */
-  /* min-height: 300px; /* Replaced by explicit height for mobile */
-}
+/* .sales-table-container .ag-theme-quartz - This was for AG-Grid, now using MUI Table */
+/* The ProductSalesTable.tsx now uses MUI Table, so this specific AG-Grid style is not needed */
+/* However, the general .sales-table-container still applies. */
 
 /* Reviews Section */
 .reviews-list {
-  list-style-type: none; /* Remove bullets */
-  padding-left: 0; /* Remove default padding */
+  /* Still used if <ul> is kept around MUI Paper items */
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .review-item {
-  border: 1px solid #e9ecef;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  background-color: #fdfdfd;
+  /* This class is now on MUI Paper, custom border/padding might conflict or be redundant */
+  /* border: 1px solid #e9ecef; */ /* Handled by Paper elevation */
+  /* padding: 1rem; */ /* Handled by Paper sx prop */
+  margin-bottom: 1rem; /* Could be kept or moved to Paper sx prop */
+  /* background-color: #fdfdfd; */ /* Handled by Paper */
+  border-radius: 6px; /* Handled by Paper */
 }
 
 .review-header {
+  /* Still used for layout within Paper */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -225,101 +135,76 @@
 }
 
 .review-customer {
+  /* Now a Typography component, class might be for minor tweaks or can be removed */
   font-weight: bold;
   color: #052849;
 }
 
 .review-score {
-  /* Style for star component within review */
+  /* Still used as a div wrapper for StarRating in reviews */
   color: #f39c12;
 }
 
-.review-text {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: #444;
-}
+/* .review-text - Handled by MUI Typography */
+/* .read-more-button - Class is on MUI Button, styles may be overridden or redundant */
 
 /* --- Desktop and Larger Screen Adjustments --- */
 @media (min-width: 768px) {
   /* Tablet and up */
-  .navbar {
-    padding: 1rem 2rem;
-  }
-  .navbar-logo {
-    font-size: 1.75rem;
-  }
-  .navbar-logo img {
-    /* Added rule for larger screens */
-    width: 50px;
-    height: 50px;
-    margin-right: 1rem;
-  }
-  .navbar-links {
-    gap: 1rem;
-  }
-  .navbar-links a {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-  }
-
   .main-content {
     padding: 2rem;
   }
 
-  .content-section {
-    padding: 2rem;
-  }
-
-  .content-section h2 {
+  .product-summary-section h2,
+  .sales-data-section h2,
+  .product-details-section h2,
+  .reviews-section h2 {
     font-size: 2rem;
   }
 
   .product-summary-layout {
-    flex-direction: row; /* Side-by-side image and text */
+    flex-direction: row;
     align-items: flex-start;
   }
   .product-image-container {
-    flex: 0 0 300px; /* Fixed width for image container */
+    flex: 0 0 300px;
     text-align: left;
   }
   .product-main-image {
-    max-width: 100%; /* Image takes full width of its container */
+    max-width: 100%;
   }
-  .product-text-info {
-    flex: 1;
-  }
-  .product-text-info h1 {
-    font-size: 2.25rem;
+  /* .product-text-info - Handled by MUI Grid/Typography */
+  /* .product-text-info h1 - Handled by MUI Typography */
+
+  .sales-chart-container .sales-chart {
+    max-height: 450px;
   }
 
-  /* If we want a two-column layout for some main sections on desktop */
-  /* Example: 
-  .desktop-two-column {
-    display: flex;
-    gap: 2rem;
-  }
-  .desktop-two-column > div {
-    flex: 1;
-  }
-  */
+  /* .sales-table-container .ag-theme-quartz for desktop - Removed */
 }
 
 @media (min-width: 1024px) {
   /* Larger desktops */
   .sales-data-layout {
-    flex-direction: row;
     align-items: stretch;
   }
   .sales-data-layout > div {
-    flex: 1 1 0;
+    flex: 1 1 auto;
     min-width: 0;
-    /* These containers will stretch equally in height */
   }
 
   .sales-chart-container .sales-chart,
-  .sales-table-container .ag-theme-quartz {
-    height: 100%; /* Make chart and table fill their stretched parent container */
-    min-height: 300px; /* Ensure they still have a reasonable min-height */
+  .sales-table-container .MuiTableContainer-root {
+    /* Target MUI table container */
+    height: auto;
+  }
+
+  .sales-chart-container .sales-chart {
+    max-height: 500px;
+  }
+
+  .sales-table-container .MuiTableContainer-root {
+    /* Target MUI table for consistent height */
+    height: 500px;
   }
 }

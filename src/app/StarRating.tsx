@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { FaStar, FaRegStar } from 'react-icons/fa';
+import { ElementType, FC } from 'react';
+import { FaRegStar, FaStar } from 'react-icons/fa';
 
 interface StarRatingProps {
   rating: number;
@@ -16,9 +16,11 @@ const StarRating: FC<StarRatingProps> = ({
 
   const stars = Array.from({ length: maxStars }, (_, index) => {
     if (index < filledStars) {
-      return <FaStar key={index} className="star-filled" />;
+      const IconComponent = FaStar as ElementType;
+      return <IconComponent key={index} className="star-filled" />;
     } else {
-      return <FaRegStar key={index} className="star-empty" />;
+      const IconComponent = FaRegStar as ElementType;
+      return <IconComponent key={index} className="star-empty" />;
     }
   });
 

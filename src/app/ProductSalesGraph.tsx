@@ -43,6 +43,43 @@ const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
       },
       legend: {
         position: 'top' as const,
+        labels: {
+          boxWidth: 20,
+          padding: 10,
+          font: {
+            size: 10,
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 8,
+          maxRotation: 45,
+          minRotation: 0,
+          font: {
+            size: 9,
+          },
+        },
+      },
+      y: {
+        ticks: {
+          maxTicksLimit: 6,
+          font: {
+            size: 9,
+          },
+        },
+      },
+    },
+    elements: {
+      point: {
+        radius: 2,
+        hoverRadius: 4,
+      },
+      line: {
+        tension: 0.1,
       },
     },
   };

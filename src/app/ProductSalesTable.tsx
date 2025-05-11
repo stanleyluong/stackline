@@ -1,89 +1,161 @@
-import { ColDef } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { AgGridReact } from 'ag-grid-react';
-import { FC, useMemo } from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import TableSortLabel from '@mui/material/TableSortLabel';
+import { FC, useMemo, useState } from 'react';
 import { WeeklySales } from './productSlice';
 
 interface ProductSalesTableProps {
   salesData: WeeklySales[];
 }
 
-export const dateValueFormatter = (params: any) => {
-  const [year, month, day] = params.value.split('-');
+export type SalesDataKey = keyof WeeklySales;
+
+export const dateValueFormatter = (value: string) => {
+  const [year, month, day] = value.split('-');
   return `${month}-${day}-${year}`;
 };
 
-const currencyFormatter = (params: any) => {
-  if (typeof params.value === 'number') {
-    return '$' + params.value.toLocaleString('en-US');
+const currencyFormatter = (value: number) => {
+  if (typeof value === 'number') {
+    return '$' + value.toLocaleString('en-US');
   }
   return '';
 };
 
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+type Order = 'asc' | 'desc';
+
+function getComparator<Key extends keyof any>(
+  order: Order,
+  orderBy: Key
+): (
+  a: { [key in Key]: number | string },
+  b: { [key in Key]: number | string }
+) => number {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function stableSort<T>(
+  array: readonly T[],
+  comparator: (a: T, b: T) => number
+) {
+  const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) {
+      return order;
+    }
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
+
+interface HeadCell {
+  id: SalesDataKey;
+  label: string;
+  numeric: boolean;
+}
+
+const headCells: readonly HeadCell[] = [
+  { id: 'weekEnding', label: 'Week Ending', numeric: false },
+  { id: 'retailSales', label: 'Retail Sales', numeric: true },
+  { id: 'wholesaleSales', label: 'Wholesale Sales', numeric: true },
+  { id: 'unitsSold', label: 'Units Sold', numeric: true },
+  { id: 'retailerMargin', label: 'Retailer Margin', numeric: true },
+];
+
 const ProductSalesTable: FC<ProductSalesTableProps> = ({ salesData }) => {
-  const defaultColDef = useMemo(
-    () => ({
-      resizable: true,
-      sortable: true,
-      // minWidth: 100, // A default minWidth for all columns if desired
-    }),
-    []
+  const [order, setOrder] = useState<Order>('asc');
+  const [orderBy, setOrderBy] = useState<SalesDataKey>('weekEnding');
+
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: SalesDataKey
+  ) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const sortedSalesData = useMemo(
+    () => stableSort(salesData, getComparator(order, orderBy)),
+    [salesData, order, orderBy]
   );
 
-  const colDefs: ColDef<WeeklySales>[] = useMemo(
-    () => [
-      {
-        field: 'weekEnding',
-        headerName: 'Week Ending',
-        valueFormatter: dateValueFormatter,
-        width: 130, // Slightly reduced fixed width
-        minWidth: 120,
-      },
-      {
-        field: 'retailSales',
-        headerName: 'Retail Sales',
-        valueFormatter: currencyFormatter,
-        flex: 1, // Allow this column to flex
-        minWidth: 130, // Prevent it from becoming too small
-      },
-      {
-        field: 'wholesaleSales',
-        headerName: 'Wholesale Sales',
-        valueFormatter: currencyFormatter,
-        flex: 1, // Allow this column to flex
-        minWidth: 140, // Prevent it from becoming too small
-      },
-      {
-        field: 'unitsSold',
-        headerName: 'Units Sold',
-        width: 100, // Reduced fixed width
-        minWidth: 90,
-      },
-      {
-        field: 'retailerMargin',
-        headerName: 'Retailer Margin',
-        valueFormatter: currencyFormatter,
-        flex: 1, // Allow this column to flex
-        minWidth: 140, // Prevent it from becoming too small
-      },
-    ],
-    []
-  );
   return (
-    <div
-      className="ag-theme-quartz sales-table" // The class sales-table has padding: 15px in App.css
-    >
-      <AgGridReact
-        rowData={salesData}
-        columnDefs={colDefs}
-        defaultColDef={defaultColDef} // Apply default col def
-        rowSelection="multiple"
-        domLayout="normal" // Ensures grid behaves well within CSS constraints
-        // Consider columnResized and gridReady events for auto-sizing if needed
-        // onGridReady={(params) => params.api.sizeColumnsToFit()} // Example: sizes columns to fit available width initially
-      />
-    </div>
+    <TableContainer component={Paper} className="sales-table">
+      <Table sx={{ minWidth: 650 }} aria-label="sales data table">
+        <TableHead>
+          <TableRow>
+            {headCells.map((headCell) => (
+              <TableCell
+                key={headCell.id}
+                align={headCell.numeric ? 'right' : 'left'}
+                sortDirection={orderBy === headCell.id ? order : false}
+                sx={{ fontWeight: 'bold' }}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  onClick={(event) => handleRequestSort(event, headCell.id)}
+                >
+                  {headCell.label}
+                </TableSortLabel>
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sortedSalesData.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={headCells.length} align="center">
+                No sales data to display.
+              </TableCell>
+            </TableRow>
+          ) : (
+            sortedSalesData.map((row, index) => (
+              <TableRow
+                key={row.weekEnding + '-' + index}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {dateValueFormatter(row.weekEnding)}
+                </TableCell>
+                <TableCell align="right">
+                  {currencyFormatter(row.retailSales)}
+                </TableCell>
+                <TableCell align="right">
+                  {currencyFormatter(row.wholesaleSales)}
+                </TableCell>
+                <TableCell align="right">
+                  {row.unitsSold.toLocaleString('en-US')}
+                </TableCell>
+                <TableCell align="right">
+                  {currencyFormatter(row.retailerMargin)}
+                </TableCell>
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
+
 export default ProductSalesTable;
