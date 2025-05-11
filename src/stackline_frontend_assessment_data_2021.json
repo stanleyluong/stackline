@@ -10,6 +10,31 @@
         "customer": "ILoveToReview",
         "review": "I had not seen the infomercial when I purchased this. I was looking for a powerful smoothie maker after my smoothie blender died. The base is MUCH heavier/substantial and well made than the Magic Bullet. It also looks more expensive/nice. I know this because I was at Target examining them both closely. The 600 watts of power has been great to tear through kale, chard, frozen berries, almonds, chia seeds. I love the consistency of the smoothie when I am done. it is not a complete liquid, but really well blended. I love that you keep the nutrition of the pulp. It is not like my first old juicer that left the pulp out of the juice, but also the nutrition. It was a NIGHTMARE to clean. Then I bought the smoothie blender that is now kaput! The Nutri Bullet literally rinses clean in ten seconds. Obviously rinse it right after you are done using it. My daughter won't touch anything green and we put kale, chard, broccoli and fruit,berries to make it NOT green and she likes it. Honestly we are NOT a family that likes kale, chard, broccoli, prunes, but feel so much better now that we are ingesting them. It took about two weeks for me to notice a difference and feel better. My husband and I have been having two a day and I have lost 4 lbs in 18 days without trying. They just keep you full and satisfied. It has taken the edge off my sweet tooth. They will keep you regular.I not sure know why they can not just give you two large smoothie cups. We only use the big size.",
         "score": 5
+      },
+      {
+        "customer": "SmoothieFan",
+        "review": "Works great for my daily smoothies! Powerful and easy to clean.",
+        "score": 5
+      },
+      {
+        "customer": "HealthyEater",
+        "review": "A bit noisy, but blends everything perfectly. Worth the price.",
+        "score": 4
+      },
+      {
+        "customer": "BusyMom",
+        "review": "Saves me so much time in the mornings. Kids love the fruit blends.",
+        "score": 5
+      },
+      {
+        "customer": "BudgetShopper",
+        "review": "Decent blender for the cost. Not as robust as some high-end models, but does the job.",
+        "score": 3
+      },
+      {
+        "customer": "KitchenGadgetGuy",
+        "review": "I've used many blenders, and this one offers a good balance of power and convenience. The multiple cups are a plus.",
+        "score": 4
       }
     ],
     "retailer": "Amazon",
@@ -392,6 +417,125 @@
         "wholesaleSales": 550042,
         "unitsSold": 822,
         "retailerMargin": 181968
+      }
+    ]
+  },
+  {
+    "id": "B008X2C0YQ",
+    "title": "TechGizmo Pro Wireless Headphones",
+    "image": "https://via.placeholder.com/400x400.png?text=Wireless+Headphones",
+    "subtitle": "Immersive Sound Experience with Noise Cancellation",
+    "brand": "TechGizmo",
+    "reviews": [
+      {
+        "customer": "AudiophileAnt",
+        "review": "Amazing sound quality and the noise cancellation is top-notch! Battery life is also impressive.",
+        "score": 5
+      },
+      {
+        "customer": "CommuterChris",
+        "review": "Perfect for my daily commute. They are comfortable and block out train noise effectively.",
+        "score": 4
+      },
+      {
+        "customer": "GamerGail",
+        "review": "Great for gaming, clear mic and comfortable for long sessions.",
+        "score": 4
+      }
+    ],
+    "retailer": "OnlineMart",
+    "details": [
+      "Superior Hi-Fi Sound",
+      "Active Noise Cancellation",
+      "20-hour battery life",
+      "Bluetooth 5.0 Connectivity",
+      "Comfortable over-ear design"
+    ],
+    "tags": ["Electronics", "Audio", "Headphones", "New Arrival"],
+    "sales": [
+      {
+        "weekEnding": "2017-10-01",
+        "retailSales": 15000,
+        "wholesaleSales": 9000,
+        "unitsSold": 150,
+        "retailerMargin": 6000
+      },
+      {
+        "weekEnding": "2017-10-08",
+        "retailSales": 15500,
+        "wholesaleSales": 9300,
+        "unitsSold": 155,
+        "retailerMargin": 6200
+      },
+      {
+        "weekEnding": "2017-10-15",
+        "retailSales": 16000,
+        "wholesaleSales": 9600,
+        "unitsSold": 160,
+        "retailerMargin": 6400
+      },
+      {
+        "weekEnding": "2017-10-22",
+        "retailSales": 14500,
+        "wholesaleSales": 8700,
+        "unitsSold": 145,
+        "retailerMargin": 5800
+      },
+      {
+        "weekEnding": "2017-10-29",
+        "retailSales": 17000,
+        "wholesaleSales": 10200,
+        "unitsSold": 170,
+        "retailerMargin": 6800
+      },
+      {
+        "weekEnding": "2017-11-05",
+        "retailSales": 17500,
+        "wholesaleSales": 10500,
+        "unitsSold": 175,
+        "retailerMargin": 7000
+      },
+      {
+        "weekEnding": "2017-11-12",
+        "retailSales": 18000,
+        "wholesaleSales": 10800,
+        "unitsSold": 180,
+        "retailerMargin": 7200
+      },
+      {
+        "weekEnding": "2017-11-19",
+        "retailSales": 16500,
+        "wholesaleSales": 9900,
+        "unitsSold": 165,
+        "retailerMargin": 6600
+      },
+      {
+        "weekEnding": "2017-11-26",
+        "retailSales": 19000,
+        "wholesaleSales": 11400,
+        "unitsSold": 190,
+        "retailerMargin": 7600
+      },
+      {
+        "weekEnding": "2017-12-03",
+        "retailSales": 19500,
+        "wholesaleSales": 11700,
+        "unitsSold": 195,
+        "retailerMargin": 7800
+      },
+      {
+        "weekEnding": "2017-12-10",
+        "retailSales": 20000,
+        "wholesaleSales": 12000,
+        "unitsSold": 200,
+        "retailerMargin": 8000
+      },
+      {
+        "weekEnding": "2017-12-17",
+        "retailSales": 18500,
+        "wholesaleSales": 11100,
+        "unitsSold": 185,
+        "retailerMargin": 7400
       }
     ]
   }

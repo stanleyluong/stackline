@@ -1,204 +1,325 @@
+/* src/App.css - Overhaul */
+
+/* Main App Layout */
 .App {
-  text-align: center;
-  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(
+    --background-color,
+    #f4f7f9
+  ); /* Use CSS var from body or default */
 }
 
-.page-header {
-  background-color: #052849;
-  height: 60px;
+/* Navbar Styling */
+.navbar {
+  background-color: #052849; /* Dark blue */
+  color: #ffffff;
+  padding: 0.75rem 1rem; /* Mobile padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky; /* Make navbar sticky */
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  color: 'white';
 }
 
-.logo {
-  width: 100px;
-  margin-right: 20px;
+.navbar-logo img {
+  width: 40px; /* Increased from 30px */
+  height: 40px; /* Increased from 30px */
+  margin-right: 0.75rem; /* Slightly increased margin */
 }
 
-.page-body {
-  display: flex; 
-  padding: 20px;
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem; /* Spacing for mobile, will increase for desktop */
 }
 
-.page-body-info {
-  flex: 1;
-  margin: 10px;
+.navbar-links a {
+  color: #e0e0e0; /* Lighter text for contrast */
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  font-size: 0.9rem;
 }
 
-.page-body-graph-and-table {
-  flex: 6;
-  width: auto;
-  margin: 10px;
+.navbar-links a:hover,
+.navbar-links a.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
-.product-info {
-  height: 100%;
+/* Hamburger Menu for Mobile (if links don't fit) - Placeholder */
+.navbar-toggle {
+  display: none; /* Hidden by default, shown on mobile if needed */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Main Content Area */
+.main-content {
+  flex-grow: 1;
+  padding: 1rem; /* Mobile padding */
+  width: 100%;
+  max-width: 1200px; /* Max width for content on large screens */
+  margin: 0 auto; /* Center content area */
+}
+
+/* Section Styling */
+.content-section {
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-radius: 5px;
+  padding: 1.5rem; /* Mobile padding */
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
 }
 
-.product-image {
-  width: 300px;
-  height: auto;
-  cursor: zoom-in;
+.content-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #052849;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 0.5rem;
 }
 
-.product-title {
-  color: #404e63;
+/* Product Summary Section Specifics */
+.product-summary-layout {
+  display: flex;
+  flex-direction: column; /* Mobile: stack image and text */
+  gap: 1rem;
+}
+
+.product-image-container {
+  flex-shrink: 0;
+  text-align: center; /* Center image in its container */
+}
+
+.product-main-image {
+  max-width: 250px; /* Mobile image size */
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.product-text-info h1 {
+  font-size: 1.8rem; /* Product title */
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
 }
 
 .product-subtitle {
-  color: #9ca1ab;
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 1rem;
 }
 
-.tag-container {
+/* Star rating placeholder styles (adapt to your StarRating component) */
+.star-rating-component {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #f39c12;
+}
+.star-rating-component .rating-value {
+  font-weight: bold;
+  color: #333;
+}
+.star-rating-component .num-reviews {
+  font-size: 0.9em;
+  color: #7f8c8d;
+}
+
+/* Tags */
+.tags-list {
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
-  border-top: 1px solid lightgray;
-  align-items:center;
+  gap: 0.5rem;
+  margin: 1rem 0;
 }
 
-.tag {
-  display: inline-block;
-  padding: 5px 10px;
-  margin: 5px;
-  border-radius: 5px;
-  border: 1px solid lightgray;
-  background-color: #ffffff;
-  color: #36445e;
-  white-space: nowrap;
+.tag-item {
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 0.3rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
 }
 
-.sales-chart {
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
+/* Key-Value Table (Retailer, Brand, ID) */
+.key-value-table {
+  font-size: 0.95rem;
 }
-
-.sales-table {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border-radius: 5px;
-}
-
-.zoom-container {
-  position: relative;
-  display: inline-block;
-}
-
-.zoom-image {
-  width: 300px;
-  height: auto;
-  cursor: zoom-in;
-}
-
-.zoom-lens {
-  position: fixed;
-  top: 300px;
-  left: 300px;
-  width: 300px; 
-  height: 300px; 
-  border: 1px solid #d4d4d4;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  transform: translate(-50%, -50%); 
-  z-index: 10;
-}
-
-.star-rating {
-  display: grid;
-  grid-template-columns: 33% 34% 33%;
-}
-
-.average-rating {
-  margin-right: 5px; 
-  font-weight: bold; 
-  text-align: end;
-}
-
-.star-filled {
-  color: #ffc107; 
-}
-
-.star-empty {
-  color: #e0e0e0; 
-}
-
-.num-ratings {
-  color: #757575; 
-  text-align: start;
-}
-
-.product-details-section {
-  border-top: 1px solid lightgray;
-  margin-right: 20px;
-}
-
-.product-details-list {
-  text-align: left;
-}
-
-.detail {
-  margin: 5px 0;
-}
-
-.product-info-table {
-  margin: 20px;
-  text-align: left;
-}
-
-.table-row {
+.key-value-table .row {
   display: flex;
-  margin-bottom: 5px; 
+  margin-bottom: 0.5rem;
+}
+.key-value-table .key {
+  font-weight: 500;
+  width: 100px;
+  color: #34495e;
+}
+.key-value-table .value {
+  color: #555;
 }
 
-.table-label {
-  width: 120px;
-  font-weight: bold; 
+/* Sales Data Section (Chart and Table) */
+.sales-data-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.table-value {
-  flex: 1; 
+.sales-chart-container,
+.sales-table-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.reviews-section {
-  border-top: 1px solid lightgray;
-
+.sales-chart-container .sales-chart {
+  flex-grow: 1;
+  min-height: 300px; /* Graph's inner div has a min-height */
+  /* Ensure the canvas element itself can be responsive within this */
 }
 
+.sales-table-container .ag-theme-quartz {
+  width: 100% !important;
+  height: 400px; /* Explicit height for AG-Grid on mobile */
+  /* min-height: 300px; /* Replaced by explicit height for mobile */
+}
+
+/* Reviews Section */
 .reviews-list {
-  padding-left: 0; 
-  list-style-type: none; 
+  list-style-type: none; /* Remove bullets */
+  padding-left: 0; /* Remove default padding */
 }
 
-.reviews-list li {
-  margin-bottom: 10px; 
+.review-item {
+  border: 1px solid #e9ecef;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  background-color: #fdfdfd;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.review-customer {
+  font-weight: bold;
+  color: #052849;
+}
+
+.review-score {
+  /* Style for star component within review */
+  color: #f39c12;
 }
 
 .review-text {
-  margin: 10px;
-  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #444;
 }
 
-.customer-and-score {
-  display: grid;
-  grid-template-columns: auto auto;
+/* --- Desktop and Larger Screen Adjustments --- */
+@media (min-width: 768px) {
+  /* Tablet and up */
+  .navbar {
+    padding: 1rem 2rem;
+  }
+  .navbar-logo {
+    font-size: 1.75rem;
+  }
+  .navbar-logo img {
+    /* Added rule for larger screens */
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+  }
+  .navbar-links {
+    gap: 1rem;
+  }
+  .navbar-links a {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .main-content {
+    padding: 2rem;
+  }
+
+  .content-section {
+    padding: 2rem;
+  }
+
+  .content-section h2 {
+    font-size: 2rem;
+  }
+
+  .product-summary-layout {
+    flex-direction: row; /* Side-by-side image and text */
+    align-items: flex-start;
+  }
+  .product-image-container {
+    flex: 0 0 300px; /* Fixed width for image container */
+    text-align: left;
+  }
+  .product-main-image {
+    max-width: 100%; /* Image takes full width of its container */
+  }
+  .product-text-info {
+    flex: 1;
+  }
+  .product-text-info h1 {
+    font-size: 2.25rem;
+  }
+
+  /* If we want a two-column layout for some main sections on desktop */
+  /* Example: 
+  .desktop-two-column {
+    display: flex;
+    gap: 2rem;
+  }
+  .desktop-two-column > div {
+    flex: 1;
+  }
+  */
 }
 
-.read-more-button {
-  border-radius: 20px; 
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+@media (min-width: 1024px) {
+  /* Larger desktops */
+  .sales-data-layout {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .sales-data-layout > div {
+    flex: 1 1 0;
+    min-width: 0;
+    /* These containers will stretch equally in height */
+  }
 
-.read-more-button:hover {
-  background-color: #0056b3; 
+  .sales-chart-container .sales-chart,
+  .sales-table-container .ag-theme-quartz {
+    height: 100%; /* Make chart and table fill their stretched parent container */
+    min-height: 300px; /* Ensure they still have a reasonable min-height */
+  }
 }

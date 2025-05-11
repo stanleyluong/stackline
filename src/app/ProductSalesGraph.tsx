@@ -1,15 +1,15 @@
-import { FC } from 'react';
 import {
-  Chart as ChartJS,
   CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
+  Chart as ChartJS,
   Filler,
   Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
 } from 'chart.js';
+import { FC } from 'react';
 
 import { Line } from 'react-chartjs-2';
 import { WeeklySales } from './productSlice';
@@ -32,10 +32,11 @@ interface ProductSalesGraphProps {
 const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       title: {
         display: true,
-        text: "Sales",
+        text: 'Sales',
         font: {
           family: 'sans-serif',
         },
@@ -50,7 +51,7 @@ const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
     const [year, month, day] = week.weekEnding.split('-');
     return `${month}-${day}-${year}`;
   });
-  
+
   const data = {
     labels,
     datasets: [
@@ -87,7 +88,7 @@ const ProductSalesGraph: FC<ProductSalesGraphProps> = ({ salesData }) => {
 
   return (
     <div className="sales-chart">
-      <Line options={options} data={data} width={"500px"}/>
+      <Line options={options} data={data} />
     </div>
   );
 };
