@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom'; // Import RouterLink, useNavigate, useLocation
 import logo from '../stackline_logo.svg'; // Assuming logo is in src/
 
 // MUI Components
@@ -41,6 +42,8 @@ const LogoImg = styled('img')(({ theme }) => ({
 
 const Navbar: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -55,11 +58,18 @@ const Navbar: React.FC = () => {
     sectionId: string
   ) => {
     e.preventDefault();
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
     handleCloseNavMenu(); // Close mobile menu after click
+
+    if (location.pathname !== '/') {
+      navigate(`/#${sectionId}`);
+      // Scrolling will be handled by MainPageContent's useEffect after navigation
+    } else {
+      // Already on the main page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -83,7 +93,7 @@ const Navbar: React.FC = () => {
               key={link.label}
               color="inherit" // Inherits AppBar's text color (should be white/light)
               onClick={(e) => handleNavClick(e, link.sectionId)}
-              href={`#${link.sectionId}`} // Keep for context, but click is handled
+              href={`/${link.sectionId}`} // Corrected: Add leading slash for root-relative path with hash
               sx={{
                 color: '#e0e0e0', // from .navbar-links a
                 padding: { xs: '0.5rem 0.75rem', sm: '0.5rem 1rem' },
@@ -97,6 +107,23 @@ const Navbar: React.FC = () => {
               {link.label}
             </Button>
           ))}
+          {/* About Link for Desktop */}
+          <Button
+            component={RouterLink}
+            to="/about"
+            color="inherit"
+            sx={{
+              color: '#e0e0e0',
+              padding: { xs: '0.5rem 0.75rem', sm: '0.5rem 1rem' },
+              fontSize: { xs: '0.9rem', sm: '1rem' },
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                color: '#ffffff',
+              },
+            }}
+          >
+            About
+          </Button>
         </Box>
         {/* Mobile Navigation Menu Icon and Menu */}
         <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
@@ -137,7 +164,8 @@ const Navbar: React.FC = () => {
                 {/* Using Button for consistency, or just text with sx if preferred */}
                 <Button
                   component="a"
-                  href={`#${link.sectionId}`}
+                  href={`/${link.sectionId}`} // Corrected: Add leading slash for root-relative path with hash
+                  onClick={(e) => e.preventDefault()} // Prevent default on the button itself.
                   sx={{
                     color: 'inherit',
                     textDecoration: 'none',
@@ -149,6 +177,21 @@ const Navbar: React.FC = () => {
                 </Button>
               </MenuItem>
             ))}
+            {/* About Link for Mobile */}
+            <MenuItem onClick={handleCloseNavMenu}>
+              <Button
+                component={RouterLink}
+                to="/about"
+                sx={{
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  width: '100%',
+                  justifyContent: 'flex-start',
+                }}
+              >
+                About
+              </Button>
+            </MenuItem>
           </Menu>
         </Box>
       </Toolbar>

@@ -22,6 +22,15 @@ import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
+// Import React Router components
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
+import AboutPage from './app/AboutPage'; // Import the new AboutPage
+
 // --- Import or define new Sectional Components (will be created next) ---
 // Placeholder for ProductSummarySection
 const ProductSummarySection: React.FC<{ product: Product; id: string }> = ({
@@ -237,6 +246,44 @@ const ReviewsSection: React.FC<{ product: Product; id: string }> = ({
 };
 // --- End Sectional Component Placeholders ---
 
+// Component to group all main page sections
+const MainPageContent: React.FC<{ product: Product }> = ({ product }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const idToScrollTo = location.hash.substring(1); // Remove '#'
+      // Ensure the ID is one of the expected section IDs before scrolling
+      if (Object.values(SECTION_IDS).includes(idToScrollTo)) {
+        const element = document.getElementById(idToScrollTo);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          // Optional: Clear the hash from the URL after scrolling to prevent issues
+          // if the user clicks the same link again from the main page.
+          // window.history.replaceState(null, '', location.pathname + location.search);
+        }
+      }
+    }
+    // We only want this to run when the hash changes or when the product (which implies page content is ready) changes.
+    // If product is not included, and navigation happens quickly, MainPageContent might not be fully rendered with section IDs.
+  }, [location.hash, product]);
+
+  return (
+    <>
+      <ProductSummarySection
+        product={product}
+        id={SECTION_IDS.PRODUCT_SUMMARY}
+      />
+      <SalesDataSection product={product} id={SECTION_IDS.SALES_DATA} />
+      <ProductDetailsSection
+        product={product}
+        id={SECTION_IDS.PRODUCT_DETAILS}
+      />
+      <ReviewsSection product={product} id={SECTION_IDS.REVIEWS} />
+    </>
+  );
+};
+
 function App() {
   const products = useSelector((state: RootState) => state.product.products);
   const dispatch = useDispatch<AppDispatch>();
@@ -252,24 +299,20 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Navbar />
-      <main className="main-content">
-        <ProductSummarySection
-          product={currentProduct}
-          id={SECTION_IDS.PRODUCT_SUMMARY}
-        />
-        <SalesDataSection
-          product={currentProduct}
-          id={SECTION_IDS.SALES_DATA}
-        />
-        <ProductDetailsSection
-          product={currentProduct}
-          id={SECTION_IDS.PRODUCT_DETAILS}
-        />
-        <ReviewsSection product={currentProduct} id={SECTION_IDS.REVIEWS} />
-      </main>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route
+              path="/"
+              element={<MainPageContent product={currentProduct} />}
+            />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
